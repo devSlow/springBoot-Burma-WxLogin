@@ -1,0 +1,27 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8081
+wechat:
+  appid: 你的appid
+  secret: 你的秘钥
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/burma?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+
+jwt:
+  # 设置jwt签名加密时使用的秘钥
+  admin-secret-key: slow
+  # 设置jwt过期时间
+  admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+  admin-token-name: token
+  user-secret-key: slow
+  user-ttl: 7200000
+  user-token-name: authentication
