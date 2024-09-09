@@ -10,4 +10,12 @@ public interface UserLoginService extends IService<User> {
      * 微信登录
      */
     User wxLogin(UserLoginDTO userLoginDTO);
+
+    /**
+     * 根据id更新用户信息
+     * @param id
+     * @param user
+     */
+
+    void updateUserById(Long id, User user);
 }

@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,6 +20,8 @@ import java.util.Date;
 @Builder
 @TableName(value ="user")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
     /**
      * 主键
@@ -35,7 +40,7 @@ public class User implements Serializable {
     private String nickname;
 
     /**
-     * 性别
+     * 性别 0为男 1为女
      */
     private Integer gender;
 

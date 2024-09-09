@@ -55,8 +55,11 @@ public class UserLoginServiceImpl extends ServiceImpl<UserLoginMapper, User>
 //        log.info("微信登录授权码:{}",userLoginDTO.getCode());
         log.info("微信登录请求参数:{}",map);
         String json = HttpClientUtil.doGet(WX_LOGIN_URL, map);
+        log.info("微信登录返回结果:{}",json);
         JSONObject jsonObject = JSON.parseObject(json);
+
         String openid = jsonObject.getString("openid");
+        log.info("微信登录openid:{}",openid);
         if (openid == null) {
             log.info("微信登录失败:{}",openid);
             throw new LoginFailedException(MessageConstant.LOGIN_FAILED);
@@ -67,11 +70,31 @@ public class UserLoginServiceImpl extends ServiceImpl<UserLoginMapper, User>
         User user = userLoginMapper.selectOne(queryWrapper);
         if (user == null) {
             user = User.builder()
-                    .openid(openid)
+                    .openid(openid).nickname(userLoginDTO.getNickname())
+                    .gender(userLoginDTO.getGender())
+                    .avatar(userLoginDTO.getAvatar())
                     .build();
+            log.info("新增用户信息：{}",user);
             userLoginMapper.insert(user);
         }
         return user;
+    }
+
+    /**
+     * 根据id更新用户信息 完成
+     * @param id
+     * @param originalUser
+     */
+    @Override
+    public void updateUserById(Long id, User originalUser) {
+        User user = new User();
+        user.setAvatar(originalUser.getAvatar());
+        user.setGender(originalUser.getGender());
+        user.setNickname(originalUser.getNickname());
+
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<User>().eq("id", id);
+        userLoginMapper.update(user,userQueryWrapper);
+        log.info("用户id：{}，“信息修改为：{}",id,user);
     }
 }
 

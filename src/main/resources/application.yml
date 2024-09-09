@@ -2,8 +2,8 @@
 server:
   port: 8081
 wechat:
-  appid: 你的appid
-  secret: 你的秘钥
+  appid: wx8e34745c9f31706c
+  secret: 3b224fb30af0b90ddc9fd074a9d05be5
 
 spring:
   datasource:
